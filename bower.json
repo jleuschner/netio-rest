@@ -1,0 +1,27 @@
+{
+  "name": "netio-rest",
+  "version": "0.0.0",
+  "authors": [
+    "jleuschner <jens@marieswelt.com>"
+  ],
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "client/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.5",
+    "angular-bootstrap": "~0.13.4",
+    "angular-route": "~1.4.7",
+    "font-awesome": "~4.4.0",
+    "angular-resource": "~1.4.7",
+    "angular-animate": "~1.4.7"
+  }
+}

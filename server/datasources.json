@@ -1,0 +1,10 @@
+{
+  "db": {
+    "database": "",
+    "password": "",
+    "name": "db",
+    "connector": "memory",
+    "user": "",
+    "file": "./db.json"
+  }
+}

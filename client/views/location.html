@@ -1,0 +1,43 @@
+<div class="container">
+	
+	<div class="page-header">
+		<h3>Räume
+		<span class="pull-right">
+			<button class="btn btn-default" ng-click="new()"><i class="fa fa-plus fa-lg"></i></button>
+		</span>
+		</h3>
+	</div>
+
+	<div class="col-md-6">
+		<ul class="list-group">
+			<li class="list-group-item" ng-repeat="obj in locationList" ng-click="selectObj(obj)" ng-class="{ 'list-group-item-info' : obj.id==selectedObj.id }">
+				<strong>{{obj.name}}</strong>
+				<br>
+				<small>{{obj.floor}}</small>
+			</li>
+		</ul>
+	</div>
+
+
+	<div class="col-md-6">
+		<form name="frm" ng-show="selectedObj.id>=0">
+		<div class="form-group">
+				<input ng-model="selectedObj.name" type="text" class="form-control" required="true">
+				<select ng-model="selectedObj.floor" class="form-control" 
+					ng-options="floor for floor in floors" required="true">
+				</select>
+		</div>
+
+		<div class="pull-right">
+			<button type="submit" class="btn btn-primary" ng-click="save(selectedObj)" ng-disabled="!frm.$valid">
+				Save
+			</button>
+			<button class="btn btn-danger" ng-click="selectedObj={}; getList();">
+				Cancel
+			</button>
+		</div>
+		</form>
+
+	</div>
+</div>
+

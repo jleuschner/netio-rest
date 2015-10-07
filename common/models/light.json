@@ -1,0 +1,25 @@
+{
+  "name": "light",
+  "plural": "lights",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "location": {
+      "type": "belongsTo",
+      "model": "location",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": []
+}
