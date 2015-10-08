@@ -1,20 +1,12 @@
 {
-  "name": "device",
-  "plural": "devices",
+  "name": "actor",
+  "plural": "lights",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "description": {
-      "type": "string",
-      "required": false
-    },
-    "ip": {
-      "type": "string",
-      "required": true
-    },
     "name": {
       "type": "string",
       "required": true
@@ -22,9 +14,9 @@
   },
   "validations": [],
   "relations": {
-    "ports": {
-      "type": "hasMany",
-      "model": "port",
+    "location": {
+      "type": "belongsTo",
+      "model": "location",
       "foreignKey": ""
     }
   },

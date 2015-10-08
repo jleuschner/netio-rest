@@ -36,14 +36,20 @@
     "dataSource": "db",
     "public": true
   },
-  "light": {
-    "dataSource": "db",
-    "public": true
-  },
   "device": {
     "dataSource": "db",
     "public": true,
     "$promise": {},
     "$resolved": true
+  },
+  "actor": {
+    "dataSource": "db",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
+  },
+  "port": {
+    "dataSource": "db",
+    "public": true
   }
 }

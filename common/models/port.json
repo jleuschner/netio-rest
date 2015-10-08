@@ -1,6 +1,6 @@
 {
-  "name": "light",
-  "plural": "lights",
+  "name": "port",
+  "plural": "ports",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -14,12 +14,12 @@
   },
   "validations": [],
   "relations": {
-    "location": {
+    "device": {
       "type": "belongsTo",
-      "model": "location",
+      "model": "device",
       "foreignKey": ""
     }
   },
   "acls": [],
-  "methods": []
+  "methods": {}
 }

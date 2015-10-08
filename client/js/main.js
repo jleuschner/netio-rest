@@ -1,6 +1,6 @@
 var mainApp = angular.module('mainApp', [
 			'ngRoute', 'lbServices', 'ui.bootstrap', 'ngAnimate',
-			'location'
+			'location', 'device'
 			]);
 
 
@@ -13,6 +13,10 @@ mainApp.config(function ($routeProvider, $locationProvider, $httpProvider) {
 		.when('/locations/:id?', {
 			templateUrl: 'views/location.html', 
 			controller: 'locationCtrl'
+		})
+		.when('/devices/:id?', {
+			templateUrl: 'views/device.html', 
+			controller: 'deviceCtrl'
 		});
 
 });
