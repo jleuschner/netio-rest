@@ -1,0 +1,87 @@
+<div class="container" ng-init="getPortList()">
+	
+	<div class="page-header">
+		<h3>IO-Ports
+		<span class="pull-right">
+			<button class="btn btn-default" ng-click="new()"><i class="fa fa-plus fa-lg"></i></button>
+		</span>
+		</h3>
+	</div>
+
+	<div class="col-md-4">
+		<ul class="list-group">
+			<li class="list-group-item" ng-repeat="obj in portList" ng-click="selectObj(obj)" ng-class="{ 'list-group-item-info' : obj.id==selectedObj.id }">
+				<strong>{{obj.name}}</strong>
+				<br>
+				<small>{{obj.device.name}}</small>
+				<br>
+				<small>{{obj.description}}</small>
+			</li>
+		</ul>
+	</div>
+
+
+	<div class="col-md-8" ng-show="selectedObj.id>=0">
+		<tabset>
+			<tab heading="Basis">
+			<div class="tab-body">
+				<form name="frm" class="clearfix">
+					<div class="col-md-8">
+						<div class="form-group">
+							<label>Name</label>
+							<input ng-model="selectedObj.name" type="text" class="form-control" required="true">
+						</div>
+						<div class="form-group">
+							<label>Device</label>
+							<select ng-controller="deviceCtrl" ng-model="selectedObj.deviceId" class="form-control" 
+								ng-init="getDeviceList()" required="true"
+								ng-options="device.id as device.name for device in deviceList"> 
+							</select>
+						</div>
+						<div class="row">
+							<div class="col-xs-4">
+								<label>Type</label>
+								<select ng-model="selectedObj.type" class="form-control" required="true"
+									ng-options="portType for portType in portTypes"> 
+								</select>
+							</div>
+							<div class="col-xs-4">
+								<label>Port-Number</label>
+								<input ng-model="selectedObj.portnumber" type="number" min="0" class="form-control" required="true">
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-4">
+						<button type="submit" class="btn btn-block btn-primary" ng-click="save(selectedObj)" ng-disabled="!frm.$valid">
+						Save
+						</button>
+						<button class="btn btn-block btn-danger" ng-click="selectedObj={}; getPortList();">
+							Cancel
+						</button>
+
+					</div>
+				</form>
+
+			</div>
+			</tab>
+
+			<tab heading="IO - Hardware">
+			<div class="tab-body">
+				<div class="col-xs-3" ng-repeat="relay in selectedObj.data.relays track by $index">
+					<a ng-click="IoData(selectedObj,{ relays: [{id: $index, value: !relay}]})">
+					<i class="fa fa-2x" ng-class="{'fa-toggle-on text-success' : relay, 'fa-toggle-off text-info' : !relay}"></i>
+					Relay{{$index}}
+					</a>
+				</div>
+
+				<div ng-repeat="pwm in selectedObj.data.pwm track by $index">
+					PWM{{$index}}<input type="range" min="0" max="255" ng-model="pwm" ng-change="IoData(selectedObj,{pwm: [{ id:$index, value: pwm}]})">
+				</div>
+
+			</div>
+			</tab>
+		</tabset>
+	</div>
+</div>
+

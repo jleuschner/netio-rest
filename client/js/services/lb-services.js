@@ -1122,6 +1122,58 @@ module.factory(
       { 'id': '@id' },
       {
 
+        // INTERNAL. Use Location.actors.findById() instead.
+        "prototype$__findById__actors": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/locations/:id/actors/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Location.actors.destroyById() instead.
+        "prototype$__destroyById__actors": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/locations/:id/actors/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Location.actors.updateById() instead.
+        "prototype$__updateById__actors": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/locations/:id/actors/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Location.actors() instead.
+        "prototype$__get__actors": {
+          isArray: true,
+          url: urlBase + "/locations/:id/actors",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Location.actors.create() instead.
+        "prototype$__create__actors": {
+          url: urlBase + "/locations/:id/actors",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Location.actors.destroyAll() instead.
+        "prototype$__delete__actors": {
+          url: urlBase + "/locations/:id/actors",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Location.actors.count() instead.
+        "prototype$__count__actors": {
+          url: urlBase + "/locations/:id/actors/count",
+          method: "GET"
+        },
+
         /**
          * @ngdoc method
          * @name lbServices.Location#create
@@ -1543,7 +1595,7 @@ module.factory(
 
         // INTERNAL. Use Actor.location() instead.
         "::get::actor::location": {
-          url: urlBase + "/lights/:id/location",
+          url: urlBase + "/actors/:id/location",
           method: "GET"
         },
       }
@@ -1682,6 +1734,307 @@ module.factory(
     */
     R.modelName = "Location";
 
+    /**
+     * @ngdoc object
+     * @name lbServices.Location.actors
+     * @header lbServices.Location.actors
+     * @object
+     * @description
+     *
+     * The object `Location.actors` groups methods
+     * manipulating `Actor` instances related to `Location`.
+     *
+     * Call {@link lbServices.Location#actors Location.actors()}
+     * to query all related instances.
+     */
+
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Location#actors
+         * @methodOf lbServices.Location
+         *
+         * @description
+         *
+         * Queries actors of location.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `filter` – `{object=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Actor` object.)
+         * </em>
+         */
+        R.actors = function() {
+          var TargetResource = $injector.get("Actor");
+          var action = TargetResource["::get::location::actors"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Location.actors#count
+         * @methodOf lbServices.Location.actors
+         *
+         * @description
+         *
+         * Counts actors of location.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `count` – `{number=}` - 
+         */
+        R.actors.count = function() {
+          var TargetResource = $injector.get("Actor");
+          var action = TargetResource["::count::location::actors"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Location.actors#create
+         * @methodOf lbServices.Location.actors
+         *
+         * @description
+         *
+         * Creates a new instance in actors of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Actor` object.)
+         * </em>
+         */
+        R.actors.create = function() {
+          var TargetResource = $injector.get("Actor");
+          var action = TargetResource["::create::location::actors"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Location.actors#createMany
+         * @methodOf lbServices.Location.actors
+         *
+         * @description
+         *
+         * Creates a new instance in actors of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Actor` object.)
+         * </em>
+         */
+        R.actors.createMany = function() {
+          var TargetResource = $injector.get("Actor");
+          var action = TargetResource["::createMany::location::actors"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Location.actors#destroyAll
+         * @methodOf lbServices.Location.actors
+         *
+         * @description
+         *
+         * Deletes all actors of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.actors.destroyAll = function() {
+          var TargetResource = $injector.get("Actor");
+          var action = TargetResource["::delete::location::actors"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Location.actors#destroyById
+         * @methodOf lbServices.Location.actors
+         *
+         * @description
+         *
+         * Delete a related item by id for actors.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for actors
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.actors.destroyById = function() {
+          var TargetResource = $injector.get("Actor");
+          var action = TargetResource["::destroyById::location::actors"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Location.actors#findById
+         * @methodOf lbServices.Location.actors
+         *
+         * @description
+         *
+         * Find a related item by id for actors.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for actors
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Actor` object.)
+         * </em>
+         */
+        R.actors.findById = function() {
+          var TargetResource = $injector.get("Actor");
+          var action = TargetResource["::findById::location::actors"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Location.actors#updateById
+         * @methodOf lbServices.Location.actors
+         *
+         * @description
+         *
+         * Update a related item by id for actors.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for actors
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Actor` object.)
+         * </em>
+         */
+        R.actors.updateById = function() {
+          var TargetResource = $injector.get("Actor");
+          var action = TargetResource["::updateById::location::actors"];
+          return action.apply(R, arguments);
+        };
 
     return R;
   }]);
@@ -2764,13 +3117,65 @@ module.factory(
   "Actor",
   ['LoopBackResource', 'LoopBackAuth', '$injector', function(Resource, LoopBackAuth, $injector) {
     var R = Resource(
-      urlBase + "/lights/:id",
+      urlBase + "/actors/:id",
       { 'id': '@id' },
       {
 
         // INTERNAL. Use Actor.location() instead.
         "prototype$__get__location": {
-          url: urlBase + "/lights/:id/location",
+          url: urlBase + "/actors/:id/location",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Actor.ports.findById() instead.
+        "prototype$__findById__ports": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/actors/:id/ports/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Actor.ports.destroyById() instead.
+        "prototype$__destroyById__ports": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/actors/:id/ports/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Actor.ports.updateById() instead.
+        "prototype$__updateById__ports": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/actors/:id/ports/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Actor.ports() instead.
+        "prototype$__get__ports": {
+          isArray: true,
+          url: urlBase + "/actors/:id/ports",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Actor.ports.create() instead.
+        "prototype$__create__ports": {
+          url: urlBase + "/actors/:id/ports",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Actor.ports.destroyAll() instead.
+        "prototype$__delete__ports": {
+          url: urlBase + "/actors/:id/ports",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Actor.ports.count() instead.
+        "prototype$__count__ports": {
+          url: urlBase + "/actors/:id/ports/count",
           method: "GET"
         },
 
@@ -2808,7 +3213,7 @@ module.factory(
          * </em>
          */
         "create": {
-          url: urlBase + "/lights",
+          url: urlBase + "/actors",
           method: "POST"
         },
 
@@ -2847,7 +3252,7 @@ module.factory(
          */
         "createMany": {
           isArray: true,
-          url: urlBase + "/lights",
+          url: urlBase + "/actors",
           method: "POST"
         },
 
@@ -2885,7 +3290,7 @@ module.factory(
          * </em>
          */
         "upsert": {
-          url: urlBase + "/lights",
+          url: urlBase + "/actors",
           method: "PUT"
         },
 
@@ -2917,7 +3322,7 @@ module.factory(
          *  - `exists` – `{boolean=}` - 
          */
         "exists": {
-          url: urlBase + "/lights/:id/exists",
+          url: urlBase + "/actors/:id/exists",
           method: "GET"
         },
 
@@ -2952,7 +3357,7 @@ module.factory(
          * </em>
          */
         "findById": {
-          url: urlBase + "/lights/:id",
+          url: urlBase + "/actors/:id",
           method: "GET"
         },
 
@@ -2986,7 +3391,7 @@ module.factory(
          */
         "find": {
           isArray: true,
-          url: urlBase + "/lights",
+          url: urlBase + "/actors",
           method: "GET"
         },
 
@@ -3019,7 +3424,7 @@ module.factory(
          * </em>
          */
         "findOne": {
-          url: urlBase + "/lights/findOne",
+          url: urlBase + "/actors/findOne",
           method: "GET"
         },
 
@@ -3053,7 +3458,7 @@ module.factory(
          * This method returns no data.
          */
         "updateAll": {
-          url: urlBase + "/lights/update",
+          url: urlBase + "/actors/update",
           method: "POST"
         },
 
@@ -3083,7 +3488,7 @@ module.factory(
          * This method returns no data.
          */
         "deleteById": {
-          url: urlBase + "/lights/:id",
+          url: urlBase + "/actors/:id",
           method: "DELETE"
         },
 
@@ -3115,7 +3520,7 @@ module.factory(
          *  - `count` – `{number=}` - 
          */
         "count": {
-          url: urlBase + "/lights/count",
+          url: urlBase + "/actors/count",
           method: "GET"
         },
 
@@ -3152,7 +3557,7 @@ module.factory(
          * </em>
          */
         "prototype$updateAttributes": {
-          url: urlBase + "/lights/:id",
+          url: urlBase + "/actors/:id",
           method: "PUT"
         },
 
@@ -3189,8 +3594,73 @@ module.factory(
          *  - `changes` – `{ReadableStream=}` - 
          */
         "createChangeStream": {
-          url: urlBase + "/lights/change-stream",
+          url: urlBase + "/actors/change-stream",
           method: "POST"
+        },
+
+        // INTERNAL. Use Location.actors.findById() instead.
+        "::findById::location::actors": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/locations/:id/actors/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Location.actors.destroyById() instead.
+        "::destroyById::location::actors": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/locations/:id/actors/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Location.actors.updateById() instead.
+        "::updateById::location::actors": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/locations/:id/actors/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Location.actors() instead.
+        "::get::location::actors": {
+          isArray: true,
+          url: urlBase + "/locations/:id/actors",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Location.actors.create() instead.
+        "::create::location::actors": {
+          url: urlBase + "/locations/:id/actors",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Location.actors.createMany() instead.
+        "::createMany::location::actors": {
+          isArray: true,
+          url: urlBase + "/locations/:id/actors",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Location.actors.destroyAll() instead.
+        "::delete::location::actors": {
+          url: urlBase + "/locations/:id/actors",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Location.actors.count() instead.
+        "::count::location::actors": {
+          url: urlBase + "/locations/:id/actors/count",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Port.actor() instead.
+        "::get::port::actor": {
+          url: urlBase + "/ports/:id/actor",
+          method: "GET"
         },
       }
     );
@@ -3364,6 +3834,307 @@ module.factory(
           var action = TargetResource["::get::actor::location"];
           return action.apply(R, arguments);
         };
+    /**
+     * @ngdoc object
+     * @name lbServices.Actor.ports
+     * @header lbServices.Actor.ports
+     * @object
+     * @description
+     *
+     * The object `Actor.ports` groups methods
+     * manipulating `Port` instances related to `Actor`.
+     *
+     * Call {@link lbServices.Actor#ports Actor.ports()}
+     * to query all related instances.
+     */
+
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Actor#ports
+         * @methodOf lbServices.Actor
+         *
+         * @description
+         *
+         * Queries ports of actor.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `filter` – `{object=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Port` object.)
+         * </em>
+         */
+        R.ports = function() {
+          var TargetResource = $injector.get("Port");
+          var action = TargetResource["::get::actor::ports"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Actor.ports#count
+         * @methodOf lbServices.Actor.ports
+         *
+         * @description
+         *
+         * Counts ports of actor.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `count` – `{number=}` - 
+         */
+        R.ports.count = function() {
+          var TargetResource = $injector.get("Port");
+          var action = TargetResource["::count::actor::ports"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Actor.ports#create
+         * @methodOf lbServices.Actor.ports
+         *
+         * @description
+         *
+         * Creates a new instance in ports of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Port` object.)
+         * </em>
+         */
+        R.ports.create = function() {
+          var TargetResource = $injector.get("Port");
+          var action = TargetResource["::create::actor::ports"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Actor.ports#createMany
+         * @methodOf lbServices.Actor.ports
+         *
+         * @description
+         *
+         * Creates a new instance in ports of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Port` object.)
+         * </em>
+         */
+        R.ports.createMany = function() {
+          var TargetResource = $injector.get("Port");
+          var action = TargetResource["::createMany::actor::ports"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Actor.ports#destroyAll
+         * @methodOf lbServices.Actor.ports
+         *
+         * @description
+         *
+         * Deletes all ports of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.ports.destroyAll = function() {
+          var TargetResource = $injector.get("Port");
+          var action = TargetResource["::delete::actor::ports"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Actor.ports#destroyById
+         * @methodOf lbServices.Actor.ports
+         *
+         * @description
+         *
+         * Delete a related item by id for ports.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for ports
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.ports.destroyById = function() {
+          var TargetResource = $injector.get("Port");
+          var action = TargetResource["::destroyById::actor::ports"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Actor.ports#findById
+         * @methodOf lbServices.Actor.ports
+         *
+         * @description
+         *
+         * Find a related item by id for ports.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for ports
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Port` object.)
+         * </em>
+         */
+        R.ports.findById = function() {
+          var TargetResource = $injector.get("Port");
+          var action = TargetResource["::findById::actor::ports"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Actor.ports#updateById
+         * @methodOf lbServices.Actor.ports
+         *
+         * @description
+         *
+         * Update a related item by id for ports.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for ports
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Port` object.)
+         * </em>
+         */
+        R.ports.updateById = function() {
+          var TargetResource = $injector.get("Port");
+          var action = TargetResource["::updateById::actor::ports"];
+          return action.apply(R, arguments);
+        };
 
     return R;
   }]);
@@ -3396,6 +4167,12 @@ module.factory(
         // INTERNAL. Use Port.device() instead.
         "prototype$__get__device": {
           url: urlBase + "/ports/:id/device",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Port.actor() instead.
+        "prototype$__get__actor": {
+          url: urlBase + "/ports/:id/actor",
           method: "GET"
         },
 
@@ -3876,6 +4653,65 @@ module.factory(
           url: urlBase + "/devices/:id/ports/count",
           method: "GET"
         },
+
+        // INTERNAL. Use Actor.ports.findById() instead.
+        "::findById::actor::ports": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/actors/:id/ports/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Actor.ports.destroyById() instead.
+        "::destroyById::actor::ports": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/actors/:id/ports/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Actor.ports.updateById() instead.
+        "::updateById::actor::ports": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/actors/:id/ports/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Actor.ports() instead.
+        "::get::actor::ports": {
+          isArray: true,
+          url: urlBase + "/actors/:id/ports",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Actor.ports.create() instead.
+        "::create::actor::ports": {
+          url: urlBase + "/actors/:id/ports",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Actor.ports.createMany() instead.
+        "::createMany::actor::ports": {
+          isArray: true,
+          url: urlBase + "/actors/:id/ports",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Actor.ports.destroyAll() instead.
+        "::delete::actor::ports": {
+          url: urlBase + "/actors/:id/ports",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Actor.ports.count() instead.
+        "::count::actor::ports": {
+          url: urlBase + "/actors/:id/ports/count",
+          method: "GET"
+        },
       }
     );
 
@@ -4046,6 +4882,42 @@ module.factory(
         R.device = function() {
           var TargetResource = $injector.get("Device");
           var action = TargetResource["::get::port::device"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Port#actor
+         * @methodOf lbServices.Port
+         *
+         * @description
+         *
+         * Fetches belongsTo relation actor.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `refresh` – `{boolean=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Actor` object.)
+         * </em>
+         */
+        R.actor = function() {
+          var TargetResource = $injector.get("Actor");
+          var action = TargetResource["::get::port::actor"];
           return action.apply(R, arguments);
         };
 

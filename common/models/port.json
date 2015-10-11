@@ -18,6 +18,11 @@
       "type": "belongsTo",
       "model": "device",
       "foreignKey": ""
+    },
+    "actor": {
+      "type": "belongsTo",
+      "model": "actor",
+      "foreignKey": ""
     }
   },
   "acls": [],

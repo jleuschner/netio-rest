@@ -1,6 +1,6 @@
 {
   "name": "actor",
-  "plural": "lights",
+  "plural": "actors",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -17,6 +17,11 @@
     "location": {
       "type": "belongsTo",
       "model": "location",
+      "foreignKey": ""
+    },
+    "ports": {
+      "type": "hasMany",
+      "model": "port",
       "foreignKey": ""
     }
   },

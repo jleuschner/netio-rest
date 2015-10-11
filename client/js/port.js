@@ -1,16 +1,18 @@
 (function () {
 
-	var app = angular.module('location', []);
+	var app = angular.module('port', []);
 
-	app.controller('locationCtrl', ['$scope', '$routeParams', 'Location', function ($scope, $routeParams, Location) {
-		$scope.floors = ['UG', 'EG', '1OG'];
-		$scope.locationList = [];
+	app.controller('portCtrl', ['$scope', '$routeParams', 'Port', function ($scope, $routeParams, Port) {
+
+		$scope.portTypes=['Relay','PWM'];
+
+		$scope.portList = [];
 		$scope.selectedObj = {};
 
 
 		// Aufruf per /:id
 		if ($routeParams.id) {
-			Location.findById({ id: $routeParams.id })
+			Port.findById({ id: $routeParams.id })
 				.$promise
 				.then(function (result) {
 					if (result) {
@@ -23,12 +25,11 @@
 		// ----------------
 
 
-		$scope.getLocationList = function() {
-			Location.find()
+		$scope.getPortList = function() {
+			Port.find({ filter : { include : 'device' }})
 			.$promise
 			.then(function (list) {
-				console.log(list);
-				$scope.locationList = list;
+				$scope.portList = list;
 			});
 		};
 
@@ -48,12 +49,11 @@
 			if (obj.id>0) {
 				$scope.selectedObj.$save().then(function(){ $scope.selectedObj={}; });
 			} else {
-				Location.create(obj).$promise.then(function(){ $scope.getLocationList(); $scope.selectedObj={}; });
+				Port.create(obj).$promise.then(function(){ $scope.getPortList(); $scope.selectedObj={}; });
 			}
 		}
 
 
-		//$scope.getLocationList();
 	} ]);
 
 })();

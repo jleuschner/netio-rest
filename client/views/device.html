@@ -1,16 +1,16 @@
-<div class="container">
+<div class="container" ng-init="getDeviceList()">
 	
 	<div class="page-header">
 		<h3>Devices
 		<span class="pull-right">
-			<button class="btn btn-default" ng-click="new()"><i class="fa fa-plus fa-lg"></i></button>
+			<button class="btn btn-default" ng-click="newDevice()"><i class="fa fa-plus fa-lg"></i></button>
 		</span>
 		</h3>
 	</div>
 
-	<div class="col-md-6">
+	<div class="col-md-4">
 		<ul class="list-group">
-			<li class="list-group-item" ng-repeat="obj in objList" ng-click="selectObj(obj)" ng-class="{ 'list-group-item-info' : obj.id==selectedObj.id }">
+			<li class="list-group-item" ng-repeat="obj in deviceList" ng-click="selectDevice(obj)" ng-class="{ 'list-group-item-info' : obj.id==selectedDevice.id }">
 				<strong>{{obj.name}}</strong>
 				<br>
 				<small>{{obj.ip}}</small>
@@ -21,42 +21,53 @@
 	</div>
 
 
-	<div class="col-md-6" ng-show="selectedObj.id>=0">
-		<form name="frm" class="clearfix">
-			<div class="col-md-8">
-				<div class="form-group">
-					<input ng-model="selectedObj.name" type="text" class="form-control" required="true">
-					<input ng-model="selectedObj.description" type="text" class="form-control" required="false">
-					<input ng-model="selectedObj.ip" type="text" class="form-control" required="true">
-					<select ng-model="selectedObj.floor" class="form-control" 
-						ng-options="Devicetype for Devicetype in Devicetypes" required="true">
-					</select>
+	<div class="col-md-8" ng-show="selectedDevice.id>=0">
+		<tabset>
+			<tab heading="Basis">
+			<div class="tab-body">
+				<form name="ctrl.frm" class="clearfix">
+					<div class="col-md-8">
+						<div class="form-group">
+							<input ng-model="selectedDevice.name" type="text" class="form-control" required="true">
+							<input ng-model="selectedDevice.description" type="text" class="form-control" required="false">
+							<input ng-model="selectedDevice.ip" type="text" class="form-control" required="true">
+							<select ng-model="selectedDevice.floor" class="form-control" 
+								ng-options="Devicetype for Devicetype in Devicetypes" required="true">
+							</select>
+						</div>
+					</div>
+
+					<div class="col-md-4">
+						<button type="submit" class="btn btn-block btn-primary" ng-click="saveDevice(selectedDevice)" ng-disabled="!ctrl.frm.$valid">
+						Save
+						</button>
+						<button class="btn btn-block btn-danger" ng-click="selectedDevice={}; getList();">
+							Cancel
+						</button>
+						Drity: {{frm.$dirty}}
+						Pristine: {{frm.$pristine}}
+					</div>
+				</form>
+
+			</div>
+			</tab>
+
+			<tab heading="IO - Hardware">
+			<div class="tab-body">
+				<div class="col-xs-3" ng-repeat="relay in selectedDevice.data.relays track by $index">
+					<a ng-click="IoData(selectedDevice,{ relays: [{id: $index, value: !relay}]})">
+					<i class="fa fa-2x" ng-class="{'fa-toggle-on text-success' : relay, 'fa-toggle-off text-info' : !relay}"></i>
+					Relay{{$index}}
+					</a>
 				</div>
-			</div>
 
-			<div class="col-md-4">
-				<button type="submit" class="btn btn-block btn-primary" ng-click="save(selectedObj)" ng-disabled="!frm.$valid">
-				Save
-				</button>
-				<button class="btn btn-block btn-danger" ng-click="selectedObj={}; getList();">
-					Cancel
-				</button>
+				<div ng-repeat="pwm in selectedDevice.data.pwm track by $index">
+					PWM{{$index}}<input type="range" min="0" max="255" ng-model="pwm" ng-change="IoData(selectedDevice,{pwm: [{ id:$index, value: pwm}]})">
+				</div>
 
 			</div>
-		</form>
-
-		<hr>
-		<div class="col-xs-3" ng-repeat="relay in selectedObj.data.relays track by $index">
-			<a ng-click="IoData(selectedObj,{ relays: [{id: $index, value: !relay}]})">
-			<i class="fa fa-2x" ng-class="{'fa-toggle-on text-success' : relay, 'fa-toggle-off text-info' : !relay}"></i>
-			Relay{{$index}}
-			</a>
-		</div>
-
-		<div ng-repeat="pwm in selectedObj.data.pwm track by $index">
-			PWM{{$index}}<input type="range" min="0" max="255" ng-model="pwm" ng-change="IoData(selectedObj,{pwm: [{ id:$index, value: pwm}]})">
-		</div>
-
+			</tab>
+		</tabset>
 	</div>
 </div>
 

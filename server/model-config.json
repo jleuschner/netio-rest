@@ -51,5 +51,9 @@
   "port": {
     "dataSource": "db",
     "public": true
+  },
+  "actortype": {
+    "dataSource": "db",
+    "public": true
   }
 }

@@ -4,8 +4,8 @@
 
 	app.controller('deviceCtrl', ['$scope', '$routeParams', 'Device', function ($scope, $routeParams, Device) {
 		$scope.Devicetypes = ['PIO - V1', 'PIO - V2', 'NetIO'];
-		$scope.objList = [];
-		$scope.selectedObj = {};
+		$scope.deviceList = [];
+		$scope.selectedDevice = {};
 
 
 		// Aufruf per /:id
@@ -14,7 +14,7 @@
 				.$promise
 				.then(function (result) {
 					if (result) {
-						$scope.selectObj(result);
+						$scope.selectDevice(result);
 					} else {
 						$scope.noResults = true;
 					}
@@ -23,34 +23,42 @@
 		// ----------------
 
 
-		$scope.getList = function() {
+		$scope.getDeviceList = function() {
 			Device.find()
 			.$promise
 			.then(function (list) {
 				console.log(list);
-				$scope.objList = list;
+				$scope.deviceList = list;
 			});
 		};
 
-
-		$scope.selectObj = function (obj) {
-			$scope.selectedObj = obj;
+		$scope.selectDevice = function (obj) {
+			$scope.selectedDevice = obj;
 			$scope.IoData(obj);
 		}
 
-		$scope.new= function () {
-			$scope.selectedObj = {};
-			$scope.selectedObj.id = 0;
-			$scope.selectedObj.floor = 'EG';
+		$scope.newDevice = function () {
+			$scope.selectedDevice = {};
+			$scope.selectedDevice.id = 0;
+			$scope.selectedDevice.floor = 'EG';
 		}
 
-		$scope.save = function (obj) {
+		$scope.saveDevice = function (obj) {
 			console.log(obj);
+			console.log($scope.ctrl.frm.$dirty);
 			if (obj.id>0) {
-				$scope.selectedObj.$save().then(function(){ $scope.selectedObj={}; });
+				$scope.selectedDevice.$save().then(function(){ $scope.selectedDevice={}; });
 			} else {
-				Device.create(obj).$promise.then(function(){ $scope.getList(); $scope.selectedObj={}; });
+				Device.create(obj).$promise.then(function(){ $scope.getDeviceList(); $scope.selectedDevice={}; });
 			}
+		}
+
+		$scope.IoData = function(obj,data) {
+			Device.data({ id : obj.id},{dataObject:data})
+				.$promise
+				.then( function(result){
+					obj.data=result;
+				})
 		}
 
 		$scope.checkDevice = function(obj) {
@@ -60,27 +68,17 @@
 					console.log(result);
 					$scope.testout=result;
 				});
+	}
+
+		$scope.commands = function(obj,cmdstr) {
+			Device.commands({ id : obj.id},{commands : Array(cmdstr)})
+				.$promise
+				.then( function(result){
+				})
 		}
 
-	$scope.commands = function(obj,cmdstr) {
-		Device.commands({ id : obj.id},{commands : Array(cmdstr)})
-			.$promise
-			.then( function(result){
-				//console.log(result);
-			})
-	}
 
 
-	$scope.IoData = function(obj,data) {
-		Device.data({ id : obj.id},{dataObject:data})
-			.$promise
-			.then( function(result){
-				obj.data=result;
-			})
-	}
-
-
-		$scope.getList();
 	} ]);
 
 })();

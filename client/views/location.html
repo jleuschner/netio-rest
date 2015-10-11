@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" ng-init="getLocationList()">
 	
 	<div class="page-header">
 		<h3>Räume
@@ -32,7 +32,7 @@
 			<button type="submit" class="btn btn-primary" ng-click="save(selectedObj)" ng-disabled="!frm.$valid">
 				Save
 			</button>
-			<button class="btn btn-danger" ng-click="selectedObj={}; getList();">
+			<button class="btn btn-danger" ng-click="selectedObj={}; getLocationList();">
 				Cancel
 			</button>
 		</div>
