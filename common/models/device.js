@@ -26,8 +26,8 @@ module.exports = function (Device) {
     );
 	// ----------------- ENDE ping --------------
 
-	// ----------------- data ------------------
-	Device.data = function (Id, dataObject, cb) {
+	// ----------------- iostatus ------------------
+	Device.iostatus = function (Id, dataObject, cb) {
 		var cmd = 'json';
 		if (dataObject) cmd += ' ' + JSON.stringify(dataObject);
 		Device.findById(Id, function (err, obj) {
@@ -46,15 +46,15 @@ module.exports = function (Device) {
 	};
 
 	Device.remoteMethod(
-        'data',
+        'iostatus',
         {
-        	http: { path: '/:id/data/', verb: 'post' },
+        	http: { path: '/:id/iostatus/', verb: 'post' },
         	accepts: [{ arg: 'id', type: 'string', http: { source: 'path' }, required: true },
 										{ arg: 'dataObject', type: 'object', required: false}],
         	returns: { type: 'object', root: true }
         }
     );
-	// ----------------- ENDE command --------------
+	// ----------------- ENDE iostatus --------------
 
 	// ----------------- commands ------------------
 	Device.commands = function (Id, commands, cb) {

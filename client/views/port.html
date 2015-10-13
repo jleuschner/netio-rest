@@ -21,11 +21,11 @@
 	</div>
 
 
-	<div class="col-md-8" ng-show="selectedObj.id>=0">
+	<div class="col-md-8" ng-show="selectedObj.id>=0 || 1">
+		<form name="ctrl.frm">
 		<tabset>
 			<tab heading="Basis">
-			<div class="tab-body">
-				<form name="frm" class="clearfix">
+			<div class="tab-body clearfix">
 					<div class="col-md-8">
 						<div class="form-group">
 							<label>Name</label>
@@ -46,42 +46,58 @@
 								</select>
 							</div>
 							<div class="col-xs-4">
+								<label>Type-Tag</label>
+								<select ng-model="selectedObj.typeTag" class="form-control" 
+									ng-options="portTypeTag for portTypeTag in portTypeTags"> 
+								</select>
+							</div>
+							<div class="col-xs-4">
 								<label>Port-Number</label>
 								<input ng-model="selectedObj.portnumber" type="number" min="0" class="form-control" required="true">
 							</div>
 						</div>
 					</div>
-
-					<div class="col-md-4">
-						<button type="submit" class="btn btn-block btn-primary" ng-click="save(selectedObj)" ng-disabled="!frm.$valid">
-						Save
-						</button>
-						<button class="btn btn-block btn-danger" ng-click="selectedObj={}; getPortList();">
-							Cancel
-						</button>
-
+					<!--
+					<ioport ng-attr-port-id="{{selectedObj.id}}"}}></ioport>
+					-->
+					<div>
+						<ioport port-id="{{selectedObj.id}}"></ioport>
 					</div>
-				</form>
 
 			</div>
 			</tab>
 
-			<tab heading="IO - Hardware">
+			<tab heading="Aktor">
 			<div class="tab-body">
-				<div class="col-xs-3" ng-repeat="relay in selectedObj.data.relays track by $index">
-					<a ng-click="IoData(selectedObj,{ relays: [{id: $index, value: !relay}]})">
-					<i class="fa fa-2x" ng-class="{'fa-toggle-on text-success' : relay, 'fa-toggle-off text-info' : !relay}"></i>
-					Relay{{$index}}
-					</a>
+
+				<div class="form-group">
+					<label>Aktor</label>
+					<select ng-controller="actorCtrl" ng-model="selectedObj.actorId" class="form-control" 
+						ng-init="getActorList()" 
+						ng-options="actor.id as actor.name for actor in actorList"> 
+					</select>
 				</div>
 
-				<div ng-repeat="pwm in selectedObj.data.pwm track by $index">
-					PWM{{$index}}<input type="range" min="0" max="255" ng-model="pwm" ng-change="IoData(selectedObj,{pwm: [{ id:$index, value: pwm}]})">
-				</div>
 
 			</div>
 			</tab>
+
 		</tabset>
+		<p></p>
+		<div class="row">
+			<div class="col-xs-4 col-xs-offset-1">
+				<button class="btn btn-block btn-danger" ng-click="selectedObj={}; getPortList();">
+					Cancel
+				</button>
+			</div>
+			<div class="col-xs-4 col-xs-offset-2">
+				<button type="submit" class="btn btn-block btn-primary" ng-click="save(selectedObj)" ng-disabled="!ctrl.frm.$valid">
+				Save
+				</button>
+			</div>
+		</div>
+
+		</form>
 	</div>
 </div>
 

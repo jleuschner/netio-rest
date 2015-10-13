@@ -55,14 +55,14 @@
 			<tab heading="IO - Hardware">
 			<div class="tab-body">
 				<div class="col-xs-3" ng-repeat="relay in selectedDevice.data.relays track by $index">
-					<a ng-click="IoData(selectedDevice,{ relays: [{id: $index, value: !relay}]})">
+					<a ng-click="IoStatus(selectedDevice,{ relays: [{id: $index, value: !relay}]})">
 					<i class="fa fa-2x" ng-class="{'fa-toggle-on text-success' : relay, 'fa-toggle-off text-info' : !relay}"></i>
 					Relay{{$index}}
 					</a>
 				</div>
 
 				<div ng-repeat="pwm in selectedDevice.data.pwm track by $index">
-					PWM{{$index}}<input type="range" min="0" max="255" ng-model="pwm" ng-change="IoData(selectedDevice,{pwm: [{ id:$index, value: pwm}]})">
+					PWM{{$index}}<input type="range" min="0" max="255" ng-model="pwm" ng-change="IoStatus(selectedDevice,{pwm: [{ id:$index, value: pwm}]})">
 				</div>
 
 			</div>

@@ -57,7 +57,24 @@
 					</select>
 				</div>
 
-				<p ng-repeat="Actortype in Actortypes">{{Actortype.name}}</p>
+				<div class="form-group">
+					<label>Ports</label>
+							<table class="table table-hover table-striped">
+							<tr ng-repeat="port in selectedActor.ports" ng-class="{'text-danger' : port.typeTag=='red'}">
+								<th style="vertical-align:middle">{{port.name}}</th>
+								<th style="vertical-align:middle">{{port.typeTag}}</th>
+								<td style="text-align:right"><ioport port-id="{{port.id}}"></ioport></td>
+							</tr>
+							</table>
+				</div>
+
+<!--
+			<select ng-controller="portCtrl" ng-model="selectedObj.port" class="form-control" 
+				ng-init="getPortList()" required="true"
+				ng-options="port.id as port.name for port in portList"> 
+			</select>
+-->
+
 
 			</div>
 			</tab>

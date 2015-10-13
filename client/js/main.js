@@ -20,7 +20,7 @@ mainApp.config(function ($routeProvider, $locationProvider, $httpProvider) {
 		})
 		.when('/ports/:id?', {
 			templateUrl: 'views/port.html', 
-			controller: 'portCtrl'
+			controller: 'portCtrl as ctrl'
 		})
 		.when('/devices/:id?', {
 			templateUrl: 'views/device.html', 
@@ -29,7 +29,37 @@ mainApp.config(function ($routeProvider, $locationProvider, $httpProvider) {
 
 });
 
+mainApp.directive('bindHeightToWidth', function(){
+    var directive = {
+        restrict: 'A',
+        link: function (scope, instanceElement, instanceAttributes, controller, transclude) {
+            var heightFactor = 1;
 
+            if (instanceAttributes['bindHeightToWidth']) {
+                heightFactor = instanceAttributes['bindHeightToWidth'];
+            }
+
+            var updateHeight = function () {
+                //instanceElement.outerHeight(instanceElement[0].getBoundingClientRect().width * heightFactor);
+                instanceElement.Height(instanceElement[0].getBoundingClientRect().width * heightFactor);
+            };
+
+            scope.$watch(instanceAttributes['bindHeightToWidth'], function (value) {
+                heightFactor = value;
+                updateHeight();
+            });
+
+/*            $(window).resize(updateHeight);
+            updateHeight();
+*/
+            scope.$on('$destroy', function () {
+                $(window).unbind('resize', updateHeight);
+            });
+        }
+    };
+
+    return directive;
+});
 
 mainApp.controller('mainCtrl', ['$scope', '$location', function ($scope, $location) {
 

@@ -1,0 +1,20 @@
+
+<div ng-if="obj.type=='Integer'">
+	<div class="input-group">
+		<div class="input-group-addon">Value:</div>
+		<input class="form-control" type="number" ng-model="obj.value" ng-change="portStatus(portId,obj.value)">
+		<span class="input-group-btn">
+			<button class="btn btn-primary" ng-click="portStatus(portId,obj.value)">Set</button>
+		</span>
+	</div>
+</div>
+
+<div ng-if="obj.type=='Relay'">
+	<a ng-click="portStatus(portId,obj.value ? 0 : 1)">
+		<i class="fa fa-2x" ng-class="{'fa-toggle-on text-success' : obj.value, 'fa-toggle-off text-info' : !obj.value}"></i>
+	</a>
+</div>
+
+<div ng-if="obj.type=='PWM'">
+	<input class="text-danger" type="range" min="0" max="255" ng-model="obj.value" ng-change="portStatus(portId,obj.value)">
+</div>

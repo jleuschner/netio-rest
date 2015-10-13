@@ -34,7 +34,7 @@
 
 		$scope.selectDevice = function (obj) {
 			$scope.selectedDevice = obj;
-			$scope.IoData(obj);
+			$scope.IoStatus(obj);
 		}
 
 		$scope.newDevice = function () {
@@ -53,8 +53,8 @@
 			}
 		}
 
-		$scope.IoData = function(obj,data) {
-			Device.data({ id : obj.id},{dataObject:data})
+		$scope.IoStatus = function(obj,data) {
+			Device.iostatus({ id : obj.id},{dataObject:data})
 				.$promise
 				.then( function(result){
 					obj.data=result;
