@@ -40,8 +40,7 @@ mainApp.directive('bindHeightToWidth', function(){
             }
 
             var updateHeight = function () {
-                //instanceElement.outerHeight(instanceElement[0].getBoundingClientRect().width * heightFactor);
-                instanceElement.Height(instanceElement[0].getBoundingClientRect().width * heightFactor);
+                instanceElement.outerHeight(instanceElement[0].getBoundingClientRect().width * heightFactor);
             };
 
             scope.$watch(instanceAttributes['bindHeightToWidth'], function (value) {
@@ -49,9 +48,9 @@ mainApp.directive('bindHeightToWidth', function(){
                 updateHeight();
             });
 
-/*            $(window).resize(updateHeight);
+            $(window).resize(updateHeight);
             updateHeight();
-*/
+
             scope.$on('$destroy', function () {
                 $(window).unbind('resize', updateHeight);
             });
