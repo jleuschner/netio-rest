@@ -60,6 +60,21 @@ mainApp.directive('bindHeightToWidth', function(){
     return directive;
 });
 
+mainApp.directive('tile', function () {
+	return {
+		restrict: 'AE',
+		transclude: true,
+		template: function (elem, attr) {
+			var html = "<div class='col-md-3 col-sm-4 col-xs-6' data-bind-height-to-width='0.5'>";
+			html += "<div style='height:100%; width:100%; background-color:orange'>";
+			html += "<div ng-transclude></div>"
+			html += "</div></div>"
+
+			return html;
+		}
+	}
+});
+
 mainApp.controller('mainCtrl', ['$scope', '$location', function ($scope, $location) {
 
 
